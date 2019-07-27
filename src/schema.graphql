@@ -1,0 +1,11 @@
+type User {
+    justPlaceholderSoYogaStopYelling: String!
+}
+
+type Mutation {
+    justPlaceholderSoYogaStopYelling: String!
+}
+
+type Query {
+    justPlaceholderSoYogaStopYelling: String!
+}

@@ -15,4 +15,19 @@
     $ Choose a name for your stage: dev
     $ Select the programming language for the generated Prisma client: Don't generate
     ```
+
+#### Schemas
+
+1. Input schema: `datamodel.prisma`
+2. Output schema (generated after running `npm run deploy`) `src/generated/prisma.graphql`
+
+### Yoga
+
 5. Create prisma binding `src/db.js`
+6. Create yoga server `src/createServer.js`
+
+#### Schema
+
+This schema is some kind of API for our front apps.
+
+-   `src/schema.graphql`

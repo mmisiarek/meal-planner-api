@@ -1,19 +1,23 @@
 {
-  "name": "meal-planner-api",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mmisiarek/meal-planner-api.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/mmisiarek/meal-planner-api/issues"
-  },
-  "homepage": "https://github.com/mmisiarek/meal-planner-api#readme"
+    "name": "meal-planner-api",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "deploy": "prisma deploy --env-file variables.env"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/mmisiarek/meal-planner-api.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/mmisiarek/meal-planner-api/issues"
+    },
+    "homepage": "https://github.com/mmisiarek/meal-planner-api#readme",
+    "dependencies": {
+        "graphql": "^14.4.2",
+        "graphql-cli": "^3.0.12"
+    }
 }

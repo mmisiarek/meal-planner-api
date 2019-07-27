@@ -1,0 +1,2 @@
+endpoint: https://eu1.prisma.sh/michal-bfd436/meal-planner-api/dev
+datamodel: datamodel.prisma

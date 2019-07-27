@@ -15,3 +15,4 @@
     $ Choose a name for your stage: dev
     $ Select the programming language for the generated Prisma client: Don't generate
     ```
+5. Create prisma binding `src/db.js`

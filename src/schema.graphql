@@ -1,11 +1,39 @@
+type Alley {
+    id: ID!
+    name: String!
+}
+
+type Grocery {
+    id: ID!
+    name: String!
+    alley: Alley
+    kcal: Int!
+    fat: Float!
+    protein: Float!
+    carbs: Float!
+}
+
+input AlleyInput {
+    name: String!
+}
+
+input GroceryInput {
+    name: String!
+    alley: AlleyInput
+    kcal: Int!
+    fat: Float!
+    protein: Float!
+    carbs: Float!
+}
+
 type User {
     justPlaceholderSoYogaStopYelling: String!
 }
 
 type Mutation {
-    justPlaceholderSoYogaStopYelling: String!
+    createGrocery(data: GroceryInput!): Grocery!
 }
 
 type Query {
-    justPlaceholderSoYogaStopYelling: String!
+    groceries: [Grocery!]!
 }

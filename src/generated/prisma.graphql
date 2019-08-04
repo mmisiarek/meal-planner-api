@@ -1,13 +1,526 @@
 # source: https://eu1.prisma.sh/michal-bfd436/meal-planner-api/dev
-# timestamp: Sat Jul 27 2019 17:20:46 GMT+0200 (Central European Summer Time)
+# timestamp: Sun Aug 04 2019 21:00:42 GMT+0200 (Central European Summer Time)
+
+type AggregateAlley {
+  count: Int!
+}
+
+type AggregateGrocery {
+  count: Int!
+}
 
 type AggregateUser {
   count: Int!
 }
 
+type Alley implements Node {
+  id: ID!
+  name: String!
+}
+
+"""A connection to a list of items."""
+type AlleyConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [AlleyEdge]!
+  aggregate: AggregateAlley!
+}
+
+input AlleyCreateInput {
+  id: ID
+  name: String!
+}
+
+input AlleyCreateOneInput {
+  create: AlleyCreateInput
+  connect: AlleyWhereUniqueInput
+}
+
+"""An edge in a connection."""
+type AlleyEdge {
+  """The item at the end of the edge."""
+  node: Alley!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum AlleyOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+}
+
+type AlleyPreviousValues {
+  id: ID!
+  name: String!
+}
+
+type AlleySubscriptionPayload {
+  mutation: MutationType!
+  node: Alley
+  updatedFields: [String!]
+  previousValues: AlleyPreviousValues
+}
+
+input AlleySubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [AlleySubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [AlleySubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [AlleySubscriptionWhereInput!]
+
+  """The subscription event gets dispatched when it's listed in mutation_in"""
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: AlleyWhereInput
+}
+
+input AlleyUpdateDataInput {
+  name: String
+}
+
+input AlleyUpdateInput {
+  name: String
+}
+
+input AlleyUpdateManyMutationInput {
+  name: String
+}
+
+input AlleyUpdateOneInput {
+  create: AlleyCreateInput
+  connect: AlleyWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: AlleyUpdateDataInput
+  upsert: AlleyUpsertNestedInput
+}
+
+input AlleyUpsertNestedInput {
+  update: AlleyUpdateDataInput!
+  create: AlleyCreateInput!
+}
+
+input AlleyWhereInput {
+  """Logical AND on all given filters."""
+  AND: [AlleyWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [AlleyWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [AlleyWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+}
+
+input AlleyWhereUniqueInput {
+  id: ID
+}
+
 type BatchPayload {
   """The number of nodes that have been affected by the Batch operation."""
   count: Long!
+}
+
+type Grocery implements Node {
+  id: ID!
+  name: String!
+  alley: Alley
+  kcal: Int!
+  fat: Float!
+  protein: Float!
+  carbs: Float!
+}
+
+"""A connection to a list of items."""
+type GroceryConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [GroceryEdge]!
+  aggregate: AggregateGrocery!
+}
+
+input GroceryCreateInput {
+  id: ID
+  name: String!
+  kcal: Int!
+  fat: Float!
+  protein: Float!
+  carbs: Float!
+  alley: AlleyCreateOneInput
+}
+
+"""An edge in a connection."""
+type GroceryEdge {
+  """The item at the end of the edge."""
+  node: Grocery!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum GroceryOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  kcal_ASC
+  kcal_DESC
+  fat_ASC
+  fat_DESC
+  protein_ASC
+  protein_DESC
+  carbs_ASC
+  carbs_DESC
+}
+
+type GroceryPreviousValues {
+  id: ID!
+  name: String!
+  kcal: Int!
+  fat: Float!
+  protein: Float!
+  carbs: Float!
+}
+
+type GrocerySubscriptionPayload {
+  mutation: MutationType!
+  node: Grocery
+  updatedFields: [String!]
+  previousValues: GroceryPreviousValues
+}
+
+input GrocerySubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [GrocerySubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [GrocerySubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [GrocerySubscriptionWhereInput!]
+
+  """The subscription event gets dispatched when it's listed in mutation_in"""
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: GroceryWhereInput
+}
+
+input GroceryUpdateInput {
+  name: String
+  kcal: Int
+  fat: Float
+  protein: Float
+  carbs: Float
+  alley: AlleyUpdateOneInput
+}
+
+input GroceryUpdateManyMutationInput {
+  name: String
+  kcal: Int
+  fat: Float
+  protein: Float
+  carbs: Float
+}
+
+input GroceryWhereInput {
+  """Logical AND on all given filters."""
+  AND: [GroceryWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [GroceryWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [GroceryWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  kcal: Int
+
+  """All values that are not equal to given value."""
+  kcal_not: Int
+
+  """All values that are contained in given list."""
+  kcal_in: [Int!]
+
+  """All values that are not contained in given list."""
+  kcal_not_in: [Int!]
+
+  """All values less than the given value."""
+  kcal_lt: Int
+
+  """All values less than or equal the given value."""
+  kcal_lte: Int
+
+  """All values greater than the given value."""
+  kcal_gt: Int
+
+  """All values greater than or equal the given value."""
+  kcal_gte: Int
+  fat: Float
+
+  """All values that are not equal to given value."""
+  fat_not: Float
+
+  """All values that are contained in given list."""
+  fat_in: [Float!]
+
+  """All values that are not contained in given list."""
+  fat_not_in: [Float!]
+
+  """All values less than the given value."""
+  fat_lt: Float
+
+  """All values less than or equal the given value."""
+  fat_lte: Float
+
+  """All values greater than the given value."""
+  fat_gt: Float
+
+  """All values greater than or equal the given value."""
+  fat_gte: Float
+  protein: Float
+
+  """All values that are not equal to given value."""
+  protein_not: Float
+
+  """All values that are contained in given list."""
+  protein_in: [Float!]
+
+  """All values that are not contained in given list."""
+  protein_not_in: [Float!]
+
+  """All values less than the given value."""
+  protein_lt: Float
+
+  """All values less than or equal the given value."""
+  protein_lte: Float
+
+  """All values greater than the given value."""
+  protein_gt: Float
+
+  """All values greater than or equal the given value."""
+  protein_gte: Float
+  carbs: Float
+
+  """All values that are not equal to given value."""
+  carbs_not: Float
+
+  """All values that are contained in given list."""
+  carbs_in: [Float!]
+
+  """All values that are not contained in given list."""
+  carbs_not_in: [Float!]
+
+  """All values less than the given value."""
+  carbs_lt: Float
+
+  """All values less than or equal the given value."""
+  carbs_lte: Float
+
+  """All values greater than the given value."""
+  carbs_gt: Float
+
+  """All values greater than or equal the given value."""
+  carbs_gte: Float
+  alley: AlleyWhereInput
+}
+
+input GroceryWhereUniqueInput {
+  id: ID
 }
 
 """
@@ -18,11 +531,23 @@ scalar Long
 
 type Mutation {
   createUser(data: UserCreateInput!): User!
+  createGrocery(data: GroceryCreateInput!): Grocery!
+  createAlley(data: AlleyCreateInput!): Alley!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateGrocery(data: GroceryUpdateInput!, where: GroceryWhereUniqueInput!): Grocery
+  updateAlley(data: AlleyUpdateInput!, where: AlleyWhereUniqueInput!): Alley
   deleteUser(where: UserWhereUniqueInput!): User
+  deleteGrocery(where: GroceryWhereUniqueInput!): Grocery
+  deleteAlley(where: AlleyWhereUniqueInput!): Alley
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  upsertGrocery(where: GroceryWhereUniqueInput!, create: GroceryCreateInput!, update: GroceryUpdateInput!): Grocery!
+  upsertAlley(where: AlleyWhereUniqueInput!, create: AlleyCreateInput!, update: AlleyUpdateInput!): Alley!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  updateManyGroceries(data: GroceryUpdateManyMutationInput!, where: GroceryWhereInput): BatchPayload!
+  updateManyAlleys(data: AlleyUpdateManyMutationInput!, where: AlleyWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManyGroceries(where: GroceryWhereInput): BatchPayload!
+  deleteManyAlleys(where: AlleyWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -54,8 +579,14 @@ type PageInfo {
 
 type Query {
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  groceries(where: GroceryWhereInput, orderBy: GroceryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Grocery]!
+  alleys(where: AlleyWhereInput, orderBy: AlleyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Alley]!
   user(where: UserWhereUniqueInput!): User
+  grocery(where: GroceryWhereUniqueInput!): Grocery
+  alley(where: AlleyWhereUniqueInput!): Alley
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  groceriesConnection(where: GroceryWhereInput, orderBy: GroceryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): GroceryConnection!
+  alleysConnection(where: AlleyWhereInput, orderBy: AlleyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AlleyConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -66,6 +597,8 @@ type Query {
 
 type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  grocery(where: GrocerySubscriptionWhereInput): GrocerySubscriptionPayload
+  alley(where: AlleySubscriptionWhereInput): AlleySubscriptionPayload
 }
 
 type User implements Node {

@@ -2,3 +2,18 @@ type User {
   id: ID! @id
   name: String!
 }
+
+type Alley {
+    id: ID! @id
+    name: String!
+}
+
+type Grocery {
+    id: ID! @id
+    name: String!
+    alley: Alley
+    kcal: Int!
+    fat: Float!
+    protein: Float!
+    carbs: Float!
+}

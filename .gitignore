@@ -1,3 +1,5 @@
+variables.env
+.vscode
 
 # Created by https://www.gitignore.io/api/visualstudio,vim,node,osx
 # Edit at https://www.gitignore.io/?templates=visualstudio,vim,node,osx

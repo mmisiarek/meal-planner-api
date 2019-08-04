@@ -1,16 +1,11 @@
+const { forwardTo } = require("prisma-binding");
+
 const Query = {
-    groceries(parent, args, ctx, info) {
-        return [
-            {
-                id: "43lkfjlq",
-                name: "Potato",
-                kcal: 51,
-                fat: 4,
-                protein: 4,
-                carbs: 40
-            }
-        ];
-    }
+    groceries: forwardTo("db")
+    // Above function is equal to:
+    // async groceries(parent, args, ctx, info) {
+    //     return await ctx.db.query.groceries();
+    // }
 };
 
 module.exports = Query;

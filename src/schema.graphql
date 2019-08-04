@@ -1,24 +1,5 @@
 # import * from './generated/prisma.graphql'
 
-type Alley {
-    id: ID!
-    name: String!
-}
-
-type Grocery {
-    id: ID!
-    name: String!
-    alley: Alley
-    kcal: Int!
-    fat: Float!
-    protein: Float!
-    carbs: Float!
-}
-
-type User {
-    justPlaceholderSoYogaStopYelling: String!
-}
-
 type Mutation {
     createGrocery(data: GroceryCreateInput!): Grocery!
 }

@@ -13,16 +13,13 @@ const Mutation = {
             }
         }
     */
-    createGrocery(parent, args, ctx, info) {
-        const { name } = args.data;
-        return {
-            id: "43lkfjlq",
-            name: name,
-            kcal: 51,
-            fat: 4,
-            protein: 4,
-            carbs: 40
-        };
+    async createGrocery(parent, args, ctx, info) {
+        const newGrocery = args.data;
+        const entry = await ctx.db.mutation.createGrocery(
+            { data: newGrocery },
+            info
+        );
+        return entry;
     }
 };
 
